@@ -4,6 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(29, 27, 27);
+        }
+
+        .container {
+            width: 400px;
+            height: 550px;
+            justify-content: center;
+            background-color: rgba(33, 27, 43, 0.274);
+            margin: 0 auto;
+            box-shadow: 5px 5px black;
+        }
+
+        #kg {
+            width: 300px;
+            height: 50px;
+            border: 3px solid rgb(50, 50, 238);
+            color: gray;
+            border-radius: 5px;
+            background-color: rgb(33, 27, 43, 0.274);
+            margin: 0px 50px 0px 50px;
+        }
+
+        #cm {
+            width: 300px;
+            height: 50px;
+            border: 3px solid rgb(50, 50, 238);
+            color: gray;
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: rgb(33, 27, 43, 0.274);
+            margin: 20px 50px 20px 50px;
+        }
+
+        #calculate {
+            width: 150px;
+            height: 50px;
+            border: 3px solid rgb(50, 50, 238);
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: rgb(33, 27, 43, 0.2743);
+            margin: 20px 0px 0px 70px;
+        }
+
+        #clear {
+            width: 100px;
+            height: 50px;
+            border: 3px solid rgb(211, 25, 25);
+            color: white;
+            background-color: rgb(33, 27, 43, 0.274);
+            margin-top: 20px;
+            border-radius: 5px;
+            justify-content: center;
+            margin: 20px 0px 0px 5px;
+        }
+
+        #calculate:hover {
+            background-color: rgb(50, 50, 238);
+        }
+
+        #result {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        #result2 {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .holder {
+            align-items: center
+        }
+
+    </style>
 
 </head>
 <body>
@@ -14,8 +100,9 @@
 
         <div class="holder" onclick="result(event)">
             <button id="calculate">Calculate</button>
-            <button id="clear">Clear</button> 
+            <button id="clear" onclick="clear()">Clear</button> 
             <p id="result"></p>
+            <p id="result2"></p>
         </div>
     </div>
 
@@ -24,11 +111,20 @@
             if(event.target.tagName != 'BUTTON') return
             let kg=+document.getElementById('kg').value
             let cm=+document.getElementById('cm').value
-            let bmi=+ Math.round(kg /( (cm/100)*(cm/100) ) *1000)/1000
-            let result = 'valami'
-            if(bmi < 18.5) result = 'Category: Slim'
-            if(bmi > 18.5 && bmi < 24.9) result = 'Category: Normal'
+            let bmi=+ Math.floor(kg /( (cm/100)*(cm/100) ) *1000)/1000
+            let result = document.getElementById('result')
+            if(bmi < 18.5) result.innerHTML = 'Category: Slim 😞', result2.innerHTML = 'BMI: '+ bmi
+            if(bmi > 18.5 && bmi < 24.9) result.innerHTML = 'Category: Normal 😁', result2.innerHTML = 'BMI: '+ bmi
+            if(bmi > 24.9 && bmi < 29.9) result.innerHTML = 'Category: Overweight 😨', result2.innerHTML = 'BMI: '+ bmi
+            if(bmi > 29.9 && bmi < 34.9) result.innerHTML = 'Category: Obese 😭', result2.innerHTML = 'BMI: '+ bmi
+            if(bmi > 34.9) result.innerHTML = 'Category: Extremely obese 🗿', result2.innerHTML = 'BMI: '+ bmi
+        }
 
+        function clear() {
+            document.getElementById('kg').value = 0
+            document.getElementById('cm').value = 0
+            document.getElementById('result').innerHTML =''
+            document.getElementById('result2').innerHTML=''
         }
     </script>
 </body>
